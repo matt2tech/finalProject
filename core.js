@@ -1,40 +1,68 @@
 function quickSort(array) {
+    var final = [];
+    var less = [];
+    var greater = [];
+
     if (array.length < 2) {
         return array;
-    }
-    else {
-        var pivot = array[Math.floor(array.length / 2)];
-        var less = less(array, pivot);
-        var greater = greater(array, pivot);
+    } else {
+        var pivot = array[0];
 
-        return quickSort(less) + [pivot] + quickSort(greater);
+        // var less = array[1:].filter(x => (x <= pivot)).map(x => x)
+        // var greater = array.filter(x => (x > pivot)).map(x => x)
+
+        for(var i = 1; i < array.length; i++) {
+            if (array[i] <= pivot) {
+                less.push(array[i])
+            } else {
+                greater.push(array[i])
+            }
+        }
+
+        // var less = lessSort(array, pivot);
+        console.log("Less: " + less);
+        // var greater = greaterSort(array, pivot);
+        console.log("Greater: " + greater);
+
+        // final.push(quickSort(less));
+        // final.push(pivot);
+        // final.push(quickSort(greater));
+        return quickSort(less).concat([pivot].concat(quickSort(greater)));
     }
 }
 
-function less(array, pivot) {
-    var list = []
-    for(var i; i <= array.length; i++) {
-        if (array[i] <= pivot) {
-            list.push(array[i]);
+function lessSort(array, pivot) {
+    var list = [];
+    if (array.length < 2) {
+        return list;
+    } else {
+        for (var i = 1; i <= array.length; i++) {
+            if (array[i] <= pivot) {
+                list.push(array[i]);
+            } else {
+                continue;
+            }
         }
-        else {
-            continue;
-        }
+        return list;
     }
 }
 
-function greater(array, pivot) {
-    var list = []
-    for(var i; i <= array.length; i++) {
-        if (array[i] >= pivot) {
-            list.push(array[i]);
+function greaterSort(array, pivot) {
+    var list = [];
+    if (array.length < 2) {
+        return list;
+    } else {
+        for (var i = 1; i <= array.length; i++) {
+            if (array[i] > pivot) {
+                list.push(array[i]);
+            } else {
+                continue;
+            }
         }
-        else {
-            continue;
-        }
+        return list;
     }
 }
 
 var array = [10, 5, 2, 3];
 
-console.log(quickSort(array));
+console.log("end result: " + quickSort(array));
