@@ -15,13 +15,18 @@
     </head>
     <body>
         <form id="btn-group">
-            <input type="number" min="1">
-            <button type="button" id="select" class="btn btn-success">Select</button>
-            <button type="button" id="quick" class="btn btn-primary">Quick</button>
+            <input id="length" name="length" type="number" min="1" value="1">
+            <button type="button" id="select" id="select" class="btn btn-success">Select</button>
+            <button type="button" id="quick" id="quick" class="btn btn-primary">Quick</button>
             <!-- <button id="simple" class="btn btn-danger">Simple</button> -->
         </form>
         <div>
-            <canvas id="graph"></canvas>
+            <canvas id="graph" hidden></canvas>
+        </div>
+        <div id="performance">
+            <h1>Quicksort</h1>
+            <div id="quicksort">
+            </div>
         </div>
     </body>
     

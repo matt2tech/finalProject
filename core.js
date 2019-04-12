@@ -26,18 +26,33 @@ function arrayBuild(length) {
     return array
 }
 
-var array = [10, 5, 2, 3];
+document.getElementById("quick").addEventListener("click", function() {
+    var length = document.getElementById("length").value
+    arrayBuild(length)
 
-var arrayLength = Math.ceil(Math.random() * 10000);
+    var array = arrayBuild(length)
+    console.log("Array: " + array);
 
-var array = arrayBuild(arrayLength)
+    var start = performance.now();
+    var qSort = quickSort(array);
+    var end = performance.now();
 
-console.log("Length: " + arrayLength);
-console.log("Array: " + array);
+    console.log("Quicksort: " + qSort);
 
-var start = performance.now();
-var qSort = quickSort(array);
-var end = performance.now();
+    var quickPerform = document.getElementById("quicksort")
+    quickPerform.innerText = "Length: " + length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
+})
 
-console.log("Time: " + (end - start) + " milliseconds")
-console.log("Quicksort: " + qSort);
+// var arrayLength = Math.ceil(Math.random() * 100000);
+
+// var array = arrayBuild(arrayLength)
+// console.log("Array: " + array);
+
+// var start = performance.now();
+// var qSort = quickSort(array);
+// var end = performance.now();
+
+// console.log("Quicksort: " + qSort);
+
+// var quickPerform = document.getElementById("quicksort")
+// quickPerform.innerText = "Length: " + arrayLength + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
