@@ -28,10 +28,16 @@ function arrayBuild(length) {
 
 var array = [10, 5, 2, 3];
 
-var arrayLength = Math.ceil(Math.random() * 10);
+var arrayLength = Math.ceil(Math.random() * 10000);
 
 var array = arrayBuild(arrayLength)
 
 console.log("Length: " + arrayLength);
 console.log("Array: " + array);
-console.log("Quicksort: " + quickSort(array));
+
+var start = performance.now();
+var qSort = quickSort(array);
+var end = performance.now();
+
+console.log("Time: " + (end - start) + " milliseconds")
+console.log("Quicksort: " + qSort);
