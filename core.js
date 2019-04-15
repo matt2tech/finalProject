@@ -1,3 +1,7 @@
+var globalArray;
+
+
+// code for quicksort algorithm
 function quickSort(array) {
     var less = [];
     var greater = [];
@@ -18,6 +22,7 @@ function quickSort(array) {
     }
 }
 
+// builds array
 function arrayBuild(length) {
     array = []
     for(var i = 0; i < length; i++) {
@@ -26,15 +31,20 @@ function arrayBuild(length) {
     return array
 }
 
+// listens to build button to run arrayBuild function
+document.getElementById("build").addEventListener("click", function() {
+    var length = document.getElementById("length").value;
+    globalArray = arrayBuild(length);
+
+    console.log("Array: " + globalArray);
+
+    document.getElementById("build").setAttribute("disabled", "true");
+})
+
+// listens to quick button and runs quicksort function
 document.getElementById("quick").addEventListener("click", function() {
-    var length = document.getElementById("length").value
-    arrayBuild(length)
-
-    var array = arrayBuild(length)
-    console.log("Array: " + array);
-
     var start = performance.now();
-    var qSort = quickSort(array);
+    var qSort = quickSort(globalArray);
     var end = performance.now();
 
     console.log("Quicksort: " + qSort);
@@ -42,17 +52,3 @@ document.getElementById("quick").addEventListener("click", function() {
     var quickPerform = document.getElementById("quicksort")
     quickPerform.innerText = "Length: " + length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
 })
-
-// var arrayLength = Math.ceil(Math.random() * 100000);
-
-// var array = arrayBuild(arrayLength)
-// console.log("Array: " + array);
-
-// var start = performance.now();
-// var qSort = quickSort(array);
-// var end = performance.now();
-
-// console.log("Quicksort: " + qSort);
-
-// var quickPerform = document.getElementById("quicksort")
-// quickPerform.innerText = "Length: " + arrayLength + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
