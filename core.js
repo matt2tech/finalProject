@@ -13,9 +13,9 @@ function quickSort(array) {
 
         for(var i = 1; i < array.length; i++) {
             if (array[i] <= pivot) {
-                less.push(array[i])
+                less.push(array[i]);
             } else {
-                greater.push(array[i])
+                greater.push(array[i]);
             }
         }
         return quickSort(less).concat([pivot].concat(quickSort(greater)));
@@ -24,21 +24,26 @@ function quickSort(array) {
 
 // builds array
 function arrayBuild(length) {
-    array = []
+    array = [];
     for(var i = 0; i < length; i++) {
-        array.push(Math.ceil(Math.random() * length))
+        array.push(Math.ceil(Math.random() * length));
     }
-    return array
+    return array;
 }
 
 // listens to build button to run arrayBuild function
 document.getElementById("build").addEventListener("click", function() {
     var length = document.getElementById("length").value;
+
+    if (length > 0) {
     globalArray = arrayBuild(length);
 
     console.log("Array: " + globalArray);
 
     document.getElementById("build").setAttribute("disabled", "true");
+    } else {
+        console.log
+    }
 })
 
 // listens to quick button and runs quicksort function
@@ -49,6 +54,8 @@ document.getElementById("quick").addEventListener("click", function() {
 
     console.log("Quicksort: " + qSort);
 
-    var quickPerform = document.getElementById("quicksort")
-    quickPerform.innerText = "Length: " + length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
+    var quickPerform = document.getElementById("quicksort");
+    quickPerform.innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
+
+    document.getElementById("quick").setAttribute("disabled", "true");
 })
