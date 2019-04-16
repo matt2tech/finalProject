@@ -1,16 +1,18 @@
 // web worker for quicksort button
 self.onmessage = function(event){
-    console.log("Hitting worker")
+    console.log("Starting quicksort worker");
     switch(event.data.type){
         case "quicksort":
-            var start = performance.now()
-            var array = quickSort(event.data.data)
-            var time = performance.now() - start
-            postMessage({array: array, time: time})
+            var start = performance.now();
+            var array = quickSort(event.data.data);
+            var time = performance.now() - start;
+            postMessage({array: array, time: time});
+            console.log("Ending quicksort worker");
             break;
         default:
-            console.log("Worker error on quicksort")
+            console.log("Worker error on quicksort");
     }
+    close();
 }
 
 // code for quicksort algorithm

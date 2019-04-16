@@ -74,7 +74,7 @@ document.getElementById("bubble").addEventListener("click", function() {
 
     if (globalArray.length > 0) {
         bubble.setAttribute("disabled", "true");
-        bubble.innerText = "Loading"
+        bubble.innerText = "Sorting"
 
         worker.postMessage({ type: "bubblesort", data: globalArray });
         worker.onmessage = function(event) {
