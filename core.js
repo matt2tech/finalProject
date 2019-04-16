@@ -70,34 +70,46 @@ document.getElementById("build").addEventListener("click", function() {
     console.log("Array: " + globalArray);
 
     document.getElementById("build").setAttribute("disabled", "true");
-    } else {
-        console.log
-    }
-})
 
-// listens to quick button and runs quicksort function
-document.getElementById("quick").addEventListener("click", function() {
-    var start = performance.now();
+    var qStart = performance.now();
     var qSort = quickSort(globalArray);
-    var end = performance.now();
-
-    console.log("Quicksort: " + qSort);
-
-    var quickPerform = document.getElementById("quickPerform");
-    quickPerform.innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
-
-    document.getElementById("quick").setAttribute("disabled", "true");
-})
-
-// listens to bubble button and runs bubble sort function
-document.getElementById("bubble").addEventListener("click", function() {
+    var qEnd = performance.now();
+    
     var start = performance.now();
     var bSort = bubbleSort(globalArray);
     var end = performance.now();
 
-    console.log("Bubblesort: " + bSort);
-
+    document.getElementById("quickPerform").innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (qEnd - qStart) + " milliseconds";
     document.getElementById("bubblePerform").innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (end - start) + " milliseconds";
-
-    document.getElementById("bubble").setAttribute("disabled", "true");
+    
+    } else {
+        console.log("Invalid number");
+    }
 })
+
+// listens to quick button and runs quicksort function
+// document.getElementById("quick").addEventListener("click", function() {
+//     var start = performance.now();
+//     var qSort = quickSort(globalArray);
+//     var end = performance.now();
+
+//     console.log("Quicksort: " + qSort);
+
+//     var quickPerform = document.getElementById("quickPerform");
+//     quickPerform.innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (end - start) + " milliseconds"; 
+
+//     document.getElementById("quick").setAttribute("disabled", "true");
+// })
+
+// listens to bubble button and runs bubble sort function
+// document.getElementById("bubble").addEventListener("click", function() {
+//     var start = performance.now();
+//     var bSort = bubbleSort(globalArray);
+//     var end = performance.now();
+
+//     console.log("Bubblesort: " + bSort);
+
+//     document.getElementById("bubblePerform").innerText = "Length: " + globalArray.length + " indices" + "\nTime: " + (end - start) + " milliseconds";
+
+//     document.getElementById("bubble").setAttribute("disabled", "true");
+// })
