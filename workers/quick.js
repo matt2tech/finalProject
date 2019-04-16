@@ -1,3 +1,4 @@
+// web worker for quicksort button
 self.onmessage = function(event){
     console.log("Hitting worker")
     switch(event.data.type){

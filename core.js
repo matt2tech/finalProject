@@ -20,6 +20,9 @@ document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("quick").removeAttribute("disabled");
     document.getElementById("bubble").removeAttribute("disabled");
 
+    document.getElementById("quick").innerText = "Quick";
+    document.getElementById("bubble").innerText = "Bubble";
+
     globalArray = undefined;
 });
 
@@ -41,9 +44,11 @@ document.getElementById("build").addEventListener("click", function() {
 // listens to quick button and runs quicksort function
 document.getElementById("quick").addEventListener("click", function() {
     const worker = new Worker("workers/quick.js");
+    const quick = document.getElementById("quick")
 
     if (globalArray.length > 0) {
-        document.getElementById("quick").setAttribute("disabled", "true");
+        quick.setAttribute("disabled", "true");
+        quick.innerText = "Sorting";
 
         worker.postMessage({ type: "quicksort", data: globalArray });
         worker.onmessage = function(event) {
@@ -55,6 +60,7 @@ document.getElementById("quick").addEventListener("click", function() {
                 "\nTime: " +
                 event.data.time +
                 " milliseconds";
+            quick.innerText = "Done";
         };
     } else {
         console.log("globalArray invalid");
@@ -64,9 +70,11 @@ document.getElementById("quick").addEventListener("click", function() {
 // listens to bubble button and runs bubble sort function
 document.getElementById("bubble").addEventListener("click", function() {
     const worker = new Worker("workers/bubble.js");
+    const bubble = document.getElementById("bubble");
 
     if (globalArray.length > 0) {
-        document.getElementById("bubble").setAttribute("disabled", "true");
+        bubble.setAttribute("disabled", "true");
+        bubble.innerText = "Loading"
 
         worker.postMessage({ type: "bubblesort", data: globalArray });
         worker.onmessage = function(event) {
@@ -78,6 +86,7 @@ document.getElementById("bubble").addEventListener("click", function() {
                 "\nTime: " +
                 event.data.time +
                 " milliseconds";
+            bubble.innerText = "Done";
         };
     } else {
         console.log("globalArray invalid");
