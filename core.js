@@ -12,13 +12,13 @@ function quickSort(array) {
         var pivot = array[0];
 
         for(var i = 1; i < array.length; i++) {
-            if (array[i] <= pivot) {
+            if (array[i] < pivot) {
                 less.push(array[i]);
             } else {
                 greater.push(array[i]);
             }
         }
-        return quickSort(less).concat([pivot].concat(quickSort(greater)));
+        return quickSort(less).concat([pivot], quickSort(greater));
     }
 }
 
