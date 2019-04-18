@@ -7,7 +7,7 @@ self.onmessage = function(event){
             var time = performance.now() - start;
             postMessage({array: array, time: time});
             console.log("Ending select sort worker");
-            console.log("Select Time: " + timeArray.length);
+            console.log("Select Time length: " + timeArray.length);
             break;
         default:
             console.log("Worker error on select sort");
@@ -26,12 +26,14 @@ function selectionSort(array) {
       for(var x = i + 1; x < array.length; x++) {
         if(array[x] < array[min]) {
           min = x;
+        } else {
+            continue
         }
       }
       if(i !== min) {
         var temp = array[i];
-        array[i] = array[x];
-        array[x] = temp;
+        array[i] = array[min];
+        array[min] = temp;
       } else {
           continue;
       }
