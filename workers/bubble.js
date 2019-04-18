@@ -3,17 +3,21 @@ self.onmessage = function(event){
     console.log("Starting bubblesort worker");
     switch(event.data.type){
         case "bubblesort":
-            var start = performance.now();
+            start = performance.now();
             var array = bubbleSort(event.data.data);
             var time = performance.now() - start;
             postMessage({array: array, time: time});
             console.log("Ending bubblesort worker");
+            console.log("Bubble Time: " + timeArray.length)
             break;
         default:
             console.log("Worker error on bubblesort");
     }
-    close()
+    close();
 }
+
+var timeArray = [];
+var start;
 
 // code for bubble sort algorithm
 function bubbleSort(array) {
@@ -24,9 +28,10 @@ function bubbleSort(array) {
                 array[x] = array[x+1]
                 array[x+1] = temp
             } else {
-                continue
+                continue;
             }
         }
+        timeArray.push(performance.now() - start);
     }
     return array
 }
