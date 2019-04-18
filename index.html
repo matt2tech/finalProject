@@ -21,20 +21,23 @@
                 <button id="clear" type="button" class="btn btn-info">Clear</button>
             </div>
             <div id="sortBtns">
-                <button type="button" id="bubble" class="btn btn-danger">Bubble</button>
-                <button type="button" id="select" class="btn btn-success" hidden>Select</button>
                 <button type="button" id="quick" class="btn btn-primary">Quick</button>
+                <button type="button" id="bubble" class="btn btn-danger">Bubble</button>
+                <button type="button" id="select" class="btn btn-success">Select</button>
             </div>
         </form>
         <div>
             <canvas id="graph" hidden></canvas>
         </div>
         <div id="performance">
+            <h1 class="border-bottom d-inline">Quick Sort</h1>
+            <div id="quickPerform">
+            </div>
             <h1 class="border-bottom d-inline">Bubble Sort</h1>
             <div id="bubblePerform">
             </div>
-            <h1 class="border-bottom d-inline">Quick Sort</h1>
-            <div id="quickPerform">
+            <h1 class="border-bottom d-inline">Selection Sort</h1>
+            <div id="selectPerform">
             </div>
         </div>
     </body>
