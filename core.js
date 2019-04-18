@@ -2,27 +2,29 @@
 var globalArray;
 
 // listens to clear button. clears data and page
-// document.getElementById("clear").addEventListener("click", function() {
-//     document.getElementById("quickPerform").innerText = "";
-//     document.getElementById("bubblePerform").innerText = "";
+document.getElementById("clear").addEventListener("click", function() {
+    document.getElementById("quickPerform").innerText = "";
+    document.getElementById("bubblePerform").innerText = "";
 
-//     document.getElementById("build").removeAttribute("disabled");
-//     document.getElementById("select").setAttribute("disabled", "true");
-//     document.getElementById("quick").setAttribute("disabled", "true");
-//     document.getElementById("bubble").setAttribute("disabled", "true");
+    document.getElementById("build").removeAttribute("disabled");
+    document.getElementById("select").removeAttribute("disabled");
+    document.getElementById("quick").removeAttribute("disabled");
+    document.getElementById("bubble").removeAttribute("disabled");
 
-//     document.getElementById("quick").innerText = "Quick";
-//     document.getElementById("bubble").innerText = "Bubble";
-//     document.getElementById("build").innerText = "Build";
+    document.getElementById("quick").innerText = "Quick";
+    document.getElementById("bubble").innerText = "Bubble";
+    document.getElementById("build").innerText = "Build";
 
-//     globalArray = undefined;
-// });
+    globalArray = undefined;
+});
 
 // listens to build button to run arrayBuild function
 document.getElementById("build").addEventListener("click", function() {
     const worker = new Worker("workers/build.js");
     var length = document.getElementById("length").value;
-    var build = document.getElementById("build")
+    var build = document.getElementById("build");
+
+    document.getElementById("clear").setAttribute("disabled", "true");
 
     if (length > 0) {
         build.setAttribute("disabled", "true");
@@ -33,9 +35,7 @@ document.getElementById("build").addEventListener("click", function() {
             globalArray = event.data.array;
             console.log("Array: " + globalArray);
             document.getElementById("build").innerText = "Built";
-            document.getElementById("select").removeAttribute("disabled");
-            document.getElementById("quick").removeAttribute("disabled");
-            document.getElementById("bubble").removeAttribute("disabled");
+            document.getElementById("clear").removeAttribute("disabled");
         }
     } else {
         console.log("Invalid number");
