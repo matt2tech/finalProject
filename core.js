@@ -5,6 +5,7 @@ var globalArray;
 document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("quickPerform").innerText = "";
     document.getElementById("bubblePerform").innerText = "";
+    document.getElementById("selectPerform").innerText = "";
 
     document.getElementById("build").removeAttribute("disabled");
     document.getElementById("select").removeAttribute("disabled");
@@ -13,6 +14,7 @@ document.getElementById("clear").addEventListener("click", function() {
 
     document.getElementById("quick").innerText = "Quick";
     document.getElementById("bubble").innerText = "Bubble";
+    document.getElementById("select").innerText = "Select";
     document.getElementById("build").innerText = "Build";
 
     globalArray = undefined;
@@ -88,6 +90,32 @@ document.getElementById("bubble").addEventListener("click", function() {
                 event.data.time +
                 " milliseconds";
             bubble.innerText = "Done";
+        };
+    } else {
+        console.log("globalArray invalid");
+    }
+});
+
+// listens to select button and runs select sort function
+document.getElementById("select").addEventListener("click", function() {
+    const worker = new Worker("workers/select.js");
+    const select = document.getElementById("select");
+
+    if (globalArray.length > 0) {
+        select.setAttribute("disabled", "true");
+        select.innerText = "Sorting";
+
+        worker.postMessage({ type: "selectsort", data: globalArray });
+        worker.onmessage = function(event) {
+            console.log("Selection Sort: " + event.data.array);
+            document.getElementById("selectPerform").innerText =
+                "Length: " +
+                globalArray.length +
+                " indices" +
+                "\nTime: " +
+                event.data.time +
+                " milliseconds";
+            select.innerText = "Done";
         };
     } else {
         console.log("globalArray invalid");
