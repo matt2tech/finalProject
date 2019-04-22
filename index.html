@@ -13,9 +13,9 @@
         />
         <link rel="stylesheet" href="style.css" />
     </head>
-    <body>
-        <form id="btn-group">
-            <div id="arrayBuild">
+    <body class="p-4">
+        <form id="btn-group" class="d-flex justify-content-center">
+            <div id="arrayBuild" class="mr-1 border p-3 rounded border-dark">
                 <input
                     id="length"
                     name="length"
@@ -30,7 +30,7 @@
                     Clear
                 </button>
             </div>
-            <div id="sortBtns">
+            <div id="sortBtns" class="ml-1 border p-3 rounded border-dark">
                 <button type="button" id="quick" class="btn btn-primary">
                     Quick
                 </button>
@@ -42,7 +42,7 @@
                 </button>
             </div>
         </form>
-        <div id="performance" class="d-flex">
+        <div id="performance" class="d-flex mb-5">
             <div class="flex-1">
                 <h1 class="border-bottom d-inline">Quick Sort</h1>
                 <div id="quickPerform"></div>
