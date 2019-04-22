@@ -34,10 +34,11 @@ function selectionSort(array) {
         var temp = array[i];
         array[i] = array[min];
         array[min] = temp;
+        timeArray.push(performance.now() - start);
       } else {
+          timeArray.push(performance.now() - start);
           continue;
       }
-      timeArray.push(performance.now() - start);
     }
     return array;
   }
