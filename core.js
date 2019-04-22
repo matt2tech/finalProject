@@ -36,6 +36,7 @@ document.getElementById("build").addEventListener("click", function() {
         worker.onmessage = function(event) {
             globalArray = event.data.array;
             console.log("Array: " + globalArray);
+            buildGraph();
             document.getElementById("build").innerText = "Built";
             document.getElementById("clear").removeAttribute("disabled");
         }
@@ -65,6 +66,8 @@ document.getElementById("quick").addEventListener("click", function() {
                 " milliseconds";
             quick.innerText = "Done";
             Quick = event.data.timeArray;
+            context.strokeStyle = "#007bff";
+            plotData(Quick);
         };
     } else {
         console.log("globalArray invalid");
@@ -92,6 +95,8 @@ document.getElementById("bubble").addEventListener("click", function() {
                 " milliseconds";
             bubble.innerText = "Done";
             Bubble = event.data.timeArray;
+            context.strokeStyle = "#dc3545";
+            plotData(Bubble);
         };
     } else {
         console.log("globalArray invalid");
@@ -119,13 +124,27 @@ document.getElementById("select").addEventListener("click", function() {
                 " milliseconds";
             select.innerText = "Done";
             Select = event.data.timeArray;
+            context.strokeStyle = "#28a745";
+            plotData(Select);
         };
     } else {
         console.log("globalArray invalid");
     }
 });
 
-document.getElementById("graph").addEventListener("click", function() {
+// functions for building graph
+var Quick = [];
+var Bubble = [];
+var Select = [];
+
+
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+var xScale;
+var yScale;
+
+function buildGraph() {
     // Values for the Data Plot, they can also be obtained from a external file
             // set these values for your data
             sections = 10;
@@ -148,10 +167,7 @@ document.getElementById("graph").addEventListener("click", function() {
                 "Sep",
                 "Oct"
             ];
-            //
 
-            canvas = document.getElementById("canvas");
-            context = canvas.getContext("2d");
             context.fillStyle = "#0099ff";
             context.font = "20 pt Verdana";
 
@@ -182,17 +198,8 @@ document.getElementById("graph").addEventListener("click", function() {
             context.translate(rowSize, canvas.height + Val_min * yScale);
             context.scale(1, -1 * yScale);
 
-            // Color of each dataplot items
-
-            context.strokeStyle = "#007bff";
-            plotData(Quick);
-            context.strokeStyle = "#dc3545";
-            plotData(Bubble);
-            context.strokeStyle = "#28a745";
-            plotData(Select);
-
             document.getElementById("chart").removeAttribute("hidden");
-        })
+        }
 
 function plotData(dataSet) {
     context.beginPath();
@@ -202,8 +209,3 @@ function plotData(dataSet) {
     }
     context.stroke();
 }
-
-// functions for building graph
-var Quick = [];
-var Bubble = [];
-var Select = [];
