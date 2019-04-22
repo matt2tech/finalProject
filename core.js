@@ -36,7 +36,9 @@ document.getElementById("build").addEventListener("click", function() {
         worker.onmessage = function(event) {
             globalArray = event.data.array;
             console.log("Array: " + globalArray);
+
             buildGraph();
+
             document.getElementById("build").innerText = "Built";
             document.getElementById("clear").removeAttribute("disabled");
         }
@@ -132,7 +134,7 @@ document.getElementById("select").addEventListener("click", function() {
     }
 });
 
-// functions for building graph
+// variables for building graph
 var Quick = [];
 var Bubble = [];
 var Select = [];
@@ -144,29 +146,20 @@ var context = canvas.getContext("2d");
 var xScale;
 var yScale;
 
+var xAxis = [""]
+
 function buildGraph() {
     // Values for the Data Plot, they can also be obtained from a external file
             // set these values for your data
-            sections = 10;
+            sections = 11;
             Val_max = 130;
-            Val_min = -40;
+            Val_min = 0;
             var stepSize = 10;
-            var columnSize = 50;
+            var columnSize = 55;
             var rowSize = 50;
             var margin = 10;
-            var xAxis = [
-                " ",
-                "1",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct"
-            ];
+
+            buildXAxis();
 
             context.fillStyle = "#0099ff";
             context.font = "20 pt Verdana";
@@ -208,4 +201,10 @@ function plotData(dataSet) {
         context.lineTo(i * xScale, dataSet[i]);
     }
     context.stroke();
+}
+
+function buildXAxis() {
+    for(var i = 0; i <= globalArray.length; i += globalArray.length * 0.1) {
+        xAxis.push(i);
+    }
 }
