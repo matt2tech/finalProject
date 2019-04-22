@@ -5,7 +5,7 @@ self.onmessage = function(event){
         case "selectsort":
             var array = selectionSort(event.data.data);
             var time = performance.now() - start;
-            postMessage({array: array, time: time});
+            postMessage({array: array, time: time, timeArray: timeArray});
             console.log("Ending select sort worker");
             console.log("Select Time length: " + timeArray.length);
             break;

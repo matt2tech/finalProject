@@ -7,9 +7,11 @@ self.onmessage = function(event){
             var array = quickSort(event.data.data);
             var time = performance.now() - start;
             timeArray.push(time);
-            postMessage({array: array, time: time});
+            postMessage({array: array, time: time, timeArray: timeArray});
             console.log("Ending quicksort worker");
-            console.log("Quick Time length: " + timeArray.length)
+            console.log("Quick Time length: " + timeArray)
+            console.log("length: " + timeArray.length)
+            console.log("count: " + count);
             break;
         default:
             console.log("Worker error on quicksort");
@@ -17,15 +19,20 @@ self.onmessage = function(event){
     close();
 }
 
+var theArray = [5, 6, 4, 7, 3, 8, 2, 9, 1, 10]
 var timeArray = [];
 var start;
+var count = 0
 
 // code for quicksort algorithm
 function quickSort(array) {
     var less = [];
     var greater = [];
 
+    count++
+
     if (array.length < 2) {
+        // timeArray.push(performance.now() - start);
         return array;
     } else {
         var pivot = array[0];

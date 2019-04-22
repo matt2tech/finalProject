@@ -64,6 +64,7 @@ document.getElementById("quick").addEventListener("click", function() {
                 event.data.time +
                 " milliseconds";
             quick.innerText = "Done";
+            Quick = event.data.timeArray;
         };
     } else {
         console.log("globalArray invalid");
@@ -90,6 +91,7 @@ document.getElementById("bubble").addEventListener("click", function() {
                 event.data.time +
                 " milliseconds";
             bubble.innerText = "Done";
+            Bubble = event.data.timeArray;
         };
     } else {
         console.log("globalArray invalid");
@@ -116,8 +118,92 @@ document.getElementById("select").addEventListener("click", function() {
                 event.data.time +
                 " milliseconds";
             select.innerText = "Done";
+            Select = event.data.timeArray;
         };
     } else {
         console.log("globalArray invalid");
     }
 });
+
+document.getElementById("graph").addEventListener("click", function() {
+    // Values for the Data Plot, they can also be obtained from a external file
+            // set these values for your data
+            sections = 10;
+            Val_max = 130;
+            Val_min = -40;
+            var stepSize = 10;
+            var columnSize = 50;
+            var rowSize = 50;
+            var margin = 10;
+            var xAxis = [
+                " ",
+                "1",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct"
+            ];
+            //
+
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            context.fillStyle = "#0099ff";
+            context.font = "20 pt Verdana";
+
+            yScale =
+                (canvas.height - columnSize - margin) / (Val_max - Val_min);
+            xScale = (canvas.width - rowSize) / sections;
+
+            context.strokeStyle = "#000"; // color of grid lines
+            context.beginPath();
+            // print Parameters on X axis, and grid lines on the graph
+            for (i = 1; i <= sections; i++) {
+                var x = i * xScale;
+                context.fillText(xAxis[i], x, columnSize - margin);
+                context.moveTo(x, columnSize);
+                context.lineTo(x, canvas.height - margin);
+            }
+            // print row header and draw horizontal grid lines
+            var count = 0;
+            for (scale = Val_max; scale >= Val_min; scale = scale - stepSize) {
+                var y = columnSize + yScale * count * stepSize;
+                context.fillText(scale, margin, y + margin);
+                context.moveTo(rowSize, y);
+                context.lineTo(canvas.width, y);
+                count++;
+            }
+            context.stroke();
+
+            context.translate(rowSize, canvas.height + Val_min * yScale);
+            context.scale(1, -1 * yScale);
+
+            // Color of each dataplot items
+
+            context.strokeStyle = "#007bff";
+            plotData(Quick);
+            context.strokeStyle = "#dc3545";
+            plotData(Bubble);
+            context.strokeStyle = "#28a745";
+            plotData(Select);
+
+            document.getElementById("chart").removeAttribute("hidden");
+        })
+
+function plotData(dataSet) {
+    context.beginPath();
+    context.moveTo(0, dataSet[0]);
+    for (i = 1; i < sections; i++) {
+        context.lineTo(i * xScale, dataSet[i]);
+    }
+    context.stroke();
+}
+
+// functions for building graph
+var Quick = [];
+var Bubble = [];
+var Select = [];
