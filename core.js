@@ -11,13 +11,24 @@ document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("select").removeAttribute("disabled");
     document.getElementById("quick").removeAttribute("disabled");
     document.getElementById("bubble").removeAttribute("disabled");
+    document.getElementById("chart").setAttribute("hidden", "true");
 
     document.getElementById("quick").innerText = "Quick";
     document.getElementById("bubble").innerText = "Bubble";
     document.getElementById("select").innerText = "Select";
     document.getElementById("build").innerText = "Build";
 
+    canvas.width = canvas.width;
+
     globalArray = undefined;
+    Quick = [];
+    Bubble = [];
+    Select = [];
+    canvas = document.getElementById("canvas");
+    context = canvas.getContext("2d");
+    xScale;
+    yScale;
+    xAxis = [""]
 });
 
 // listens to build button to run arrayBuild function
@@ -87,7 +98,6 @@ document.getElementById("bubble").addEventListener("click", function() {
 
         worker.postMessage({ type: "bubblesort", data: globalArray });
         worker.onmessage = function(event) {
-            console.log("Bubble Sort: " + event.data.array);
             document.getElementById("bubblePerform").innerText =
                 "Length: " +
                 globalArray.length +
@@ -116,7 +126,6 @@ document.getElementById("select").addEventListener("click", function() {
 
         worker.postMessage({ type: "selectsort", data: globalArray });
         worker.onmessage = function(event) {
-            console.log("Selection Sort: " + event.data.array);
             document.getElementById("selectPerform").innerText =
                 "Length: " +
                 globalArray.length +
@@ -152,9 +161,9 @@ function buildGraph() {
     // Values for the Data Plot, they can also be obtained from a external file
             // set these values for your data
             sections = 11;
-            Val_max = 130;
+            Val_max = 20;
             Val_min = 0;
-            var stepSize = 10;
+            var stepSize = 1;
             var columnSize = 55;
             var rowSize = 50;
             var margin = 10;
