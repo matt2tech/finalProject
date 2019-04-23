@@ -205,6 +205,7 @@ function plotData(dataSet) {
 
 function buildXAxis() {
     for(var i = 0; i <= globalArray.length; i += globalArray.length * 0.1) {
-        xAxis.push(i);
+            i = parseFloat(i.toFixed(1));
+            xAxis.push(i);
     }
 }
