@@ -1,6 +1,20 @@
 // serves as the array that all algorithms will use
 var globalArray;
 
+// variables for building graph
+var Quick = [];
+var Bubble = [];
+var Select = [];
+
+
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+var xScale;
+var yScale;
+
+var xAxis = [""]
+
 // listens to clear button. clears data and page
 document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("quickPerform").innerText = "";
@@ -70,8 +84,8 @@ document.getElementById("quick").addEventListener("click", function() {
         worker.postMessage({ type: "quicksort", data: globalArray });
         worker.onmessage = function(event) {
             document.getElementById("quickPerform").innerText =
-                "Length: " +
-                globalArray.length +
+            "Time Indices: " +
+            event.data.timeArray.length +
                 " indices" +
                 "\nTime: " +
                 event.data.time +
@@ -98,8 +112,8 @@ document.getElementById("bubble").addEventListener("click", function() {
         worker.postMessage({ type: "bubblesort", data: globalArray });
         worker.onmessage = function(event) {
             document.getElementById("bubblePerform").innerText =
-                "Length: " +
-                globalArray.length +
+            "Time Indices: " +
+            event.data.timeArray.length +
                 " indices" +
                 "\nTime: " +
                 event.data.time +
@@ -126,8 +140,8 @@ document.getElementById("select").addEventListener("click", function() {
         worker.postMessage({ type: "selectsort", data: globalArray });
         worker.onmessage = function(event) {
             document.getElementById("selectPerform").innerText =
-                "Length: " +
-                globalArray.length +
+                "Time Indices: " +
+                event.data.timeArray.length +
                 " indices" +
                 "\nTime: " +
                 event.data.time +
@@ -142,20 +156,7 @@ document.getElementById("select").addEventListener("click", function() {
     }
 });
 
-// variables for building graph
-var Quick = [];
-var Bubble = [];
-var Select = [];
-
-
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-
-var xScale;
-var yScale;
-
-var xAxis = [""]
-
+// builds an empty graph
 function buildGraph() {
             // set these values for your data
             sections = 10;
@@ -201,6 +202,7 @@ function buildGraph() {
             document.getElementById("chart").removeAttribute("hidden");
         }
 
+// plots data points on constructed graph
 function plotData(dataSet) {
     context.beginPath();
     context.moveTo(0, dataSet[0]);
@@ -213,6 +215,7 @@ function plotData(dataSet) {
     context.stroke();
 }
 
+// builds xAxis for the graph based on globalArray length
 function buildXAxis() {
     for(var i = 0; i <= globalArray.length; i += globalArray.length * 0.1) {
             i = parseFloat(i.toFixed(1));
