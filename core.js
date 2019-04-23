@@ -69,7 +69,6 @@ document.getElementById("quick").addEventListener("click", function() {
 
         worker.postMessage({ type: "quicksort", data: globalArray });
         worker.onmessage = function(event) {
-            console.log("Quick Sort: " + event.data.array);
             document.getElementById("quickPerform").innerText =
                 "Length: " +
                 globalArray.length +
@@ -158,15 +157,14 @@ var yScale;
 var xAxis = [""]
 
 function buildGraph() {
-    // Values for the Data Plot, they can also be obtained from a external file
             // set these values for your data
-            sections = 11;
-            Val_max = 20;
+            sections = 10;
+            Val_max = 100;
             Val_min = 0;
-            var stepSize = 1;
-            var columnSize = 55;
+            var stepSize = 10;
+            var columnSize = 50;
             var rowSize = 50;
-            var margin = 10;
+            var margin = 5;
 
             buildXAxis();
 
@@ -206,8 +204,11 @@ function buildGraph() {
 function plotData(dataSet) {
     context.beginPath();
     context.moveTo(0, dataSet[0]);
-    for (i = 1; i < sections; i++) {
-        context.lineTo(i * xScale, dataSet[i]);
+    index = parseInt(globalArray.length * 0.1);
+    for (i = 1; i <= sections; i++) {
+        context.lineTo(i * xScale, dataSet[index]);
+        console.log(`${i * xScale}, ${dataSet[index]}, index: ${index}`);
+        index += parseInt(globalArray.length * 0.1) - 1;
     }
     context.stroke();
 }
