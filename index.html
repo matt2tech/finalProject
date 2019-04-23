@@ -42,7 +42,7 @@
                 </button>
             </div>
         </form>
-        <div id="performance" align="center" class="d-flex mb-5">
+        <div id="performance" align="center" class="d-flex mb-3">
             <div class="flex-1">
                 <h1 class="border-bottom d-inline">Quick Sort</h1>
                 <div id="quickPerform"></div>
@@ -58,15 +58,22 @@
         </div>
 
         <div id="chart" align="center" hidden>
-            <h2>Performance Results</h2>
+            <h2 class="border-bottom d-inline">Performance Results</h2>
 
             <!--Legends for Dataplot -->
-            <span style="color:#007bff"> Quick █</span>
-            <span style="color:#dc3545"> Bubble █</span>
-            <span style="color:#28a745"> Select █</span>
-            <br>
+            <div class="mt-3 mb-3">
+                <span style="color:#007bff"> Quick █</span>
+                <span style="color:#dc3545"> Bubble █</span>
+                <span style="color:#28a745"> Select █</span>
+            </div>
 
-            <canvas id="canvas" height="400" width="650" class="border border-dark p-3 rounded"> </canvas>
+            <canvas
+                id="canvas"
+                height="400"
+                width="650"
+                class="border border-dark p-3 rounded"
+            >
+            </canvas>
         </div>
     </body>
 
