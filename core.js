@@ -12,6 +12,7 @@ var context = canvas.getContext("2d");
 
 var xScale;
 var yScale;
+var sections;
 
 var xAxis = [""]
 
