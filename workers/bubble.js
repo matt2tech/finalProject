@@ -7,7 +7,6 @@ self.onmessage = function(event){
             var time = performance.now() - start;
             postMessage({array: array, time: time, timeArray: timeArray});
             console.log("Ending bubblesort worker");
-            console.log("Bubble Time length: " + timeArray.length)
             break;
         default:
             console.log("Worker error on bubblesort");

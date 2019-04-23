@@ -10,7 +10,6 @@ self.onmessage = function(event){
             postMessage({array: array, time: time, timeArray: timeArray});
             console.log("Ending quicksort worker");
             console.log("Quick Time length: " + timeArray)
-            console.log("length: " + timeArray.length)
             break;
         default:
             console.log("Worker error on quicksort");
