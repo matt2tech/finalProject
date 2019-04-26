@@ -190,11 +190,11 @@ function buildGraph() {
 function plotData(dataSet) {
     context.beginPath();
     context.moveTo(0, dataSet[0]);
-    index = parseInt(globalArray.length * 0.1);
+    index = parseInt(dataSet.length * 0.1);
     for (i = 1; i <= sections; i++) {
         context.lineTo(i * xScale, dataSet[index]);
         console.log(`${i * xScale}, ${dataSet[index]}, index: ${index}`);
-        index += parseInt(globalArray.length * 0.1) - 1;
+        index += parseInt(dataSet.length * 0.1) - 1;
     }
     context.stroke();
 }
