@@ -27,7 +27,7 @@ function quickSort(array) {
     var greater = [];
 
     if (array.length < 2) {
-        // timeArray.push(performance.now() - start);
+        timeArray.push(performance.now() - start);
         return array;
     } else {
         var pivot = array[0];
