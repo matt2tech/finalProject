@@ -17,9 +17,9 @@ var xAxis = [""];
 
 // listens to clear button. clears data and page
 document.getElementById("clear").addEventListener("click", function() {
-    document.getElementById("quickPerform").innerText = "";
-    document.getElementById("bubblePerform").innerText = "";
-    document.getElementById("selectPerform").innerText = "";
+    document.getElementById("quickPerform").innerText = "Time: Null";
+    document.getElementById("bubblePerform").innerText = "Time: Null";
+    document.getElementById("selectPerform").innerText = "Time: Null";
 
     document.getElementById("build").removeAttribute("disabled");
     document.getElementById("select").removeAttribute("disabled");
