@@ -25,7 +25,7 @@ document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("select").removeAttribute("disabled");
     document.getElementById("quick").removeAttribute("disabled");
     document.getElementById("bubble").removeAttribute("disabled");
-    document.getElementById("chart").setAttribute("hidden", "true");
+    document.getElementById("canvas").setAttribute("hidden", "true");
 
     document.getElementById("quick").innerText = "Quick";
     document.getElementById("bubble").innerText = "Bubble";
@@ -183,7 +183,7 @@ function buildGraph() {
     context.translate(rowSize, canvas.height + Val_min * yScale);
     context.scale(1, -1 * yScale);
 
-    document.getElementById("chart").removeAttribute("hidden");
+    document.getElementById("canvas").removeAttribute("hidden");
 }
 
 // plots data points on constructed graph
