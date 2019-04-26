@@ -5,3 +5,8 @@
 #graph {
     border: 1px solid #d3d3d3;
 }
+
+#quickPerform, #bubblePerform, #selectPerform {
+    font-size: 18px;
+    font-weight: bold;
+}
