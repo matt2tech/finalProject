@@ -1,12 +1,10 @@
 // web worker for bubblesort button
 self.onmessage = function(event){
-    console.log("Starting bubblesort worker");
     switch(event.data.type){
         case "bubblesort":
             var array = bubbleSort(event.data.data);
             var time = performance.now() - start;
             postMessage({array: array, time: time, timeArray: timeArray});
-            console.log("Ending bubblesort worker");
             break;
         default:
             console.log("Worker error on bubblesort");

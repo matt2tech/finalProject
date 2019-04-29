@@ -1,6 +1,5 @@
 // web worker for quicksort button
 self.onmessage = function(event){
-    console.log("Starting quicksort worker");
     switch(event.data.type){
         case "quicksort":
             start = performance.now();
@@ -8,8 +7,6 @@ self.onmessage = function(event){
             var time = performance.now() - start;
             timeArray.push(time);
             postMessage({array: array, time: time, timeArray: timeArray});
-            console.log("Ending quicksort worker");
-            console.log("Quick Time length: " + timeArray)
             break;
         default:
             console.log("Worker error on quicksort");

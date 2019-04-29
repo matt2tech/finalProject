@@ -1,12 +1,10 @@
 // web worker for select button
 self.onmessage = function(event){
-    console.log("Starting select sort worker");
     switch(event.data.type){
         case "selectsort":
             var array = selectionSort(event.data.data);
             var time = performance.now() - start;
             postMessage({array: array, time: time, timeArray: timeArray});
-            console.log("Ending select sort worker");
             break;
         default:
             console.log("Worker error on select sort");

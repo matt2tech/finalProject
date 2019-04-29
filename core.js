@@ -38,12 +38,16 @@ document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("select").innerText = "Select";
     document.getElementById("build").innerText = "Build";
 
+    // terminates any active workers
+    builder.terminate();
     quicker.terminate();
     bubbler.terminate();
     selecter.terminate();
 
+    // clears graph
     canvas.width = canvas.width;
 
+    // resets variables
     globalArray = undefined;
     Quick = [];
     Bubble = [];
@@ -61,8 +65,6 @@ document.getElementById("build").addEventListener("click", function() {
     var length = document.getElementById("length").value;
     var build = document.getElementById("build");
 
-    document.getElementById("clear").setAttribute("disabled", "true");
-
     if (length > 0) {
         build.setAttribute("disabled", "true");
         build.innerText = "Building";
@@ -70,15 +72,13 @@ document.getElementById("build").addEventListener("click", function() {
         builder.postMessage({ type: "build", data: length });
         builder.onmessage = function(event) {
             globalArray = event.data.array;
-            console.log("Array: " + globalArray);
 
             buildGraph();
 
             document.getElementById("build").innerText = "Built";
-            document.getElementById("clear").removeAttribute("disabled");
         };
     } else {
-        console.log("Invalid number");
+        console.log("Invalid input");
     }
 });
 
@@ -203,7 +203,6 @@ function plotData(dataSet) {
     index = parseInt(dataSet.length * 0.1);
     for (i = 1; i <= sections; i++) {
         context.lineTo(i * xScale, dataSet[index]);
-        console.log(`${i * xScale}, ${dataSet[index]}, index: ${index}`);
         index += parseInt(dataSet.length * 0.1) - 1;
     }
     context.stroke();
