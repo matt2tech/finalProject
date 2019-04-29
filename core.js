@@ -1,6 +1,12 @@
 // serves as the array that all algorithms will use
 var globalArray;
 
+// worker variables
+var builder = new Worker("workers/build.js");
+var quicker = new Worker("workers/quick.js");
+var bubbler = new Worker("workers/bubble.js");
+var selecter = new Worker("workers/select.js");
+
 // variables for building graph
 var Quick = [];
 var Bubble = [];
@@ -32,6 +38,10 @@ document.getElementById("clear").addEventListener("click", function() {
     document.getElementById("select").innerText = "Select";
     document.getElementById("build").innerText = "Build";
 
+    quicker.terminate();
+    bubbler.terminate();
+    selecter.terminate();
+
     canvas.width = canvas.width;
 
     globalArray = undefined;
@@ -47,7 +57,7 @@ document.getElementById("clear").addEventListener("click", function() {
 
 // listens to build button to run arrayBuild function
 document.getElementById("build").addEventListener("click", function() {
-    const worker = new Worker("workers/build.js");
+    builder = new Worker("workers/build.js");
     var length = document.getElementById("length").value;
     var build = document.getElementById("build");
 
@@ -57,8 +67,8 @@ document.getElementById("build").addEventListener("click", function() {
         build.setAttribute("disabled", "true");
         build.innerText = "Building";
 
-        worker.postMessage({ type: "build", data: length });
-        worker.onmessage = function(event) {
+        builder.postMessage({ type: "build", data: length });
+        builder.onmessage = function(event) {
             globalArray = event.data.array;
             console.log("Array: " + globalArray);
 
@@ -74,15 +84,15 @@ document.getElementById("build").addEventListener("click", function() {
 
 // listens to quick button and runs quicksort function
 document.getElementById("quick").addEventListener("click", function() {
-    const worker = new Worker("workers/quick.js");
     const quick = document.getElementById("quick");
+    quicker = new Worker("workers/quick.js");
 
     if (globalArray.length > 0) {
         quick.setAttribute("disabled", "true");
         quick.innerText = "Sorting";
 
-        worker.postMessage({ type: "quicksort", data: globalArray });
-        worker.onmessage = function(event) {
+        quicker.postMessage({ type: "quicksort", data: globalArray });
+        quicker.onmessage = function(event) {
             document.getElementById("quickPerform").innerText =
                 "Time: " + event.data.time + " milliseconds";
             quick.innerText = "Done";
@@ -97,15 +107,15 @@ document.getElementById("quick").addEventListener("click", function() {
 
 // listens to bubble button and runs bubble sort function
 document.getElementById("bubble").addEventListener("click", function() {
-    const worker = new Worker("workers/bubble.js");
     const bubble = document.getElementById("bubble");
+    bubbler = new Worker("workers/bubble.js");
 
     if (globalArray.length > 0) {
         bubble.setAttribute("disabled", "true");
         bubble.innerText = "Sorting";
 
-        worker.postMessage({ type: "bubblesort", data: globalArray });
-        worker.onmessage = function(event) {
+        bubbler.postMessage({ type: "bubblesort", data: globalArray });
+        bubbler.onmessage = function(event) {
             document.getElementById("bubblePerform").innerText =
                 "Time: " + event.data.time + " milliseconds";
             bubble.innerText = "Done";
@@ -120,15 +130,15 @@ document.getElementById("bubble").addEventListener("click", function() {
 
 // listens to select button and runs select sort function
 document.getElementById("select").addEventListener("click", function() {
-    const worker = new Worker("workers/select.js");
     const select = document.getElementById("select");
+    selecter = new Worker("workers/select.js");
 
     if (globalArray.length > 0) {
         select.setAttribute("disabled", "true");
         select.innerText = "Sorting";
 
-        worker.postMessage({ type: "selectsort", data: globalArray });
-        worker.onmessage = function(event) {
+        selecter.postMessage({ type: "selectsort", data: globalArray });
+        selecter.onmessage = function(event) {
             document.getElementById("selectPerform").innerText =
                 "Time: " + event.data.time + " milliseconds";
             select.innerText = "Done";
